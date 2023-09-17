@@ -1,4 +1,4 @@
-# fastapi
+# FastAPI
 
 ## Get Started
 1. Clone the repository
@@ -15,7 +15,7 @@ pip install -r requirements.txt
 
 3. Run the app
 ```bash
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 4. Check it
 - http://127.0.0.1:8000
@@ -23,5 +23,27 @@ uvicorn main:app --reload
   - http://127.0.0.1:8000/docs
   - http://127.0.0.1:8000/redoc
 
+
+## Docker
+
+1. Build image
+```bash
+docker build -t fastai-image .
+```
+2. Run a container
+
+```bash
+docker run -d --name fastai-container -p 80:80 fastai-image
+```
+3. Check it here: 
+  - http://127.0.0.1
+  - API docs: 
+    - http://127.0.0.1/docs
+    - http://127.0.0.1/redoc
+
 ## Notes
-- [Tutorial - User Guide](https://fastapi.tiangolo.com/tutorial/)
+[1]: [Tutorial - User Guide](https://fastapi.tiangolo.com/tutorial/)
+
+[2]: [uvicorn-gunicorn-fastapi-docker ](https://github.com/tiangolo/uvicorn-gunicorn-fastapi-docker/tree/master#quick-start)
+
+[3]: [Full Stack FastAPI and PostgreSQL - Base Project Generator](https://github.com/tiangolo/full-stack-fastapi-postgresql/tree/master)
