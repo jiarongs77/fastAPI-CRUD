@@ -23,6 +23,13 @@ uvicorn app.main:app --reload
   - http://127.0.0.1:8000/docs
   - http://127.0.0.1:8000/redoc
 
+## Dependency Management
+1. Add a new dependency to `pyproject.toml`
+2. Run commands:
+```bash
+poetry lock
+poetry install
+```
 
 ## Docker
 

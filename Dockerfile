@@ -1,10 +1,24 @@
 FROM python:3.11
 
+ENV POETRY_VERSION=1.6.1 \
+  POETRY_NO_INTERACTION=1 \
+  POETRY_VIRTUALENVS_CREATE=false \
+  POETRY_CACHE_DIR='/var/cache/pypoetry' \
+  POETRY_HOME='/usr/local'
+
+SHELL ["/bin/bash", "-eo", "pipefail", "-c"]
+
+# Installing `poetry` package manager:
+# https://github.com/python-poetry/poetry
+RUN curl -sSL 'https://install.python-poetry.org' | python - \
+  # https://github.com/python-poetry/poetry
+  && poetry --version
+
 WORKDIR /app
 
-COPY ./requirements.txt /app/requirements.txt
-
-RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+# Copy only requirements, to cache them in docker layer
+COPY ./poetry.lock ./pyproject.toml /app/
+RUN poetry install
 
 COPY ./app /app
 
