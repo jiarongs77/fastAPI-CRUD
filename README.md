@@ -15,7 +15,7 @@ pip install -r requirements.txt
 
 3. Run the app
 ```bash
-uvicorn app.main:app --reload
+poetry run uvicorn app.main:app --reload
 ```
 4. Check it
 - http://127.0.0.1:8000
