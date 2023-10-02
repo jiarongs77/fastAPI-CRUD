@@ -1,7 +1,7 @@
 from typing import List
 
 from fastapi.encoders import jsonable_encoder
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 
 from app.crud.base import CRUDBase
 from app.models.item import Item
@@ -25,6 +25,17 @@ class CRUDItem(CRUDBase[Item, ItemCreate, ItemUpdate]):
         return (
             db.query(self.model)
             .filter(Item.owner_id == owner_id)
+            .offset(skip)
+            .limit(limit)
+            .all()
+        )
+
+    def get_multi_public(
+        self, db: Session, *, skip: int = 0, limit: int = 100
+    ) -> List[Item]:
+        return (
+            db.query(self.model)
+            .options(joinedload(self.model.owner))
             .offset(skip)
             .limit(limit)
             .all()

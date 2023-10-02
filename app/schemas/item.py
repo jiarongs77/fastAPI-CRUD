@@ -2,6 +2,8 @@ from typing import Optional
 
 from pydantic import BaseModel
 
+from app.schemas.user import PublicUser
+
 
 # Shared properties
 class ItemBase(BaseModel):
@@ -31,7 +33,11 @@ class ItemInDBBase(ItemBase):
 
 # Properties to return to client
 class Item(ItemInDBBase):
-    pass
+    owner_id: int
+    owner: PublicUser
+
+    class Config:
+        from_attributes = True
 
 
 # Properties properties stored in DB
