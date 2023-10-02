@@ -35,8 +35,9 @@ SMTP_USER=""
 SMTP_PASSWORD=""
 EMAILS_FROM_EMAIL="info@example.com"
 ```
+4. [Set up database](#set-up-database)
 
-4. Run the app
+5. Run the app
 ```
 ./run.sh
 ```
@@ -44,7 +45,7 @@ or
 ```bash
 poetry run uvicorn app.main:app --reload
 ```
-5. Check it
+6. Check it
 - http://127.0.0.1:8000
 - API docs: 
   - http://127.0.0.1:8000/docs
@@ -67,7 +68,30 @@ docker run -d --name fastai-container -p 80:80 fastai-image
     - http://127.0.0.1/docs
     - http://127.0.0.1/redoc
 
-## Database Migration
+## Set up database
+Install postgresql
+```
+brew install postgresql
+brew services start postgresql
+brew services stop postgresql
+```
+Check if it's running
+```
+ps -ef | grep postgres
+```
+Create user with password
+```
+createuser -U postgres -W
+```
+Create database with name `fastapi_db`
+```
+createdb -U postgres -w fastapi_db
+```
+Set up initial data
+```
+./setup.sh
+```
+### Database Migration
 
 Initial migration
 ```
