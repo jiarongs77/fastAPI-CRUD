@@ -67,7 +67,7 @@ class Settings(BaseSettings):
     EMAILS_ENABLED: bool = False
 
     EMAIL_TEST_USER: EmailStr = "test@example.com"  # type: ignore
-    USERS_OPEN_REGISTRATION: bool = False
+    USERS_OPEN_REGISTRATION: bool = True  # Allow public registration or not
 
     # model_config = SettingsConfigDict(env_file="./app/.env", env_file_encoding="utf-8")
     class Config:
