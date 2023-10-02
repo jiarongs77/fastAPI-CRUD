@@ -28,6 +28,12 @@ POSTGRES_SERVER=localhost:5432
 POSTGRES_USER=your_username
 POSTGRES_PASSWORD=your_password
 POSTGRES_DB=your_db_name
+
+SMTP_PORT=587
+SMTP_HOST=smtp.gmail.com
+SMTP_USER=""
+SMTP_PASSWORD=""
+EMAILS_FROM_EMAIL="info@example.com"
 ```
 
 4. Run the app
