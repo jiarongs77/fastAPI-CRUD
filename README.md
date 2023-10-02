@@ -67,6 +67,20 @@ docker run -d --name fastai-container -p 80:80 fastai-image
     - http://127.0.0.1/docs
     - http://127.0.0.1/redoc
 
+## Database Migration
+
+Initial migration
+```
+alembic revision --autogenerate -m "Initial migration"
+alembic upgrade head
+```
+
+Further Developing
+```
+alembic revision --autogenerate -m "description of your change"
+alembic upgrade head
+```
+
 ## Notes
 [1]: [Tutorial - User Guide](https://fastapi.tiangolo.com/tutorial/)
 
