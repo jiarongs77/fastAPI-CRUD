@@ -1,19 +1,20 @@
 import logging
-from app import crud, schemas
-from app.core.config import settings
 
 from sqlalchemy.orm import Session
 
+from app import crud, schemas
+from app.core.config import settings
 from app.database import Base, SessionLocal, engine
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 def init_db(db: Session) -> None:
     # Tables should be created with Alembic migrations
     # But if you don't want to use migrations, create
     # the tables un-commenting the next line
-    Base.metadata.create_all(bind=engine) # Create all tables
+    Base.metadata.create_all(bind=engine)  # Create all tables
 
     user = crud.user.get_by_email(db, email=settings.FIRST_SUPERUSER)
     if not user:
@@ -24,8 +25,10 @@ def init_db(db: Session) -> None:
         )
         user = crud.user.create(db, obj_in=user_in)  # noqa: F841
 
+
 def init() -> None:
     init_db(SessionLocal())
+
 
 def main() -> None:
     logger.info("Creating initial data")
