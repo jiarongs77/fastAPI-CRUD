@@ -106,6 +106,20 @@ alembic revision --autogenerate -m "description of your change"
 alembic upgrade head
 ```
 
+## Testing
+
+For a simple local test, we need to set up a separate database for test, e.g. `fastapi_db_test`.
+
+## Steps
+- Change db name to `fastapi_db_test` in `.env`
+- Run `./setup` to set up initial migration
+- Create `.env.test.local` by copying `.env`
+  - It will be loaded when running test in `app/core/config.py`
+- Change back to original database name in `.env`
+- Run `./scripts/test.sh`
+
+Note: We can also use docker for setting up test environment.
+
 ## Notes
 [1]: [Tutorial - User Guide](https://fastapi.tiangolo.com/tutorial/)
 

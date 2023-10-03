@@ -27,12 +27,10 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
     def update(
         self, db: Session, *, db_obj: User, obj_in: Union[UserUpdate, Dict[str, Any]]
     ) -> User:
-        print("inx 1")
         if isinstance(obj_in, dict):
             update_data = obj_in
         else:
-            update_data = obj_in.dict(exclude_unset=True)
-        print("inx 2")
+            update_data = obj_in.model_dump(exclude_unset=True)
         if update_data["password"]:
             hashed_password = get_password_hash(update_data["password"])
             del update_data["password"]

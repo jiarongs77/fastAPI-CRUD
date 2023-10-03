@@ -155,6 +155,5 @@ def update_user(
             status_code=404,
             detail="The user with this username does not exist in the system",
         )
-    print("inx 0")
     user = crud.user.update(db, db_obj=user, obj_in=user_in)
     return user

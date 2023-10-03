@@ -1,7 +1,9 @@
 import secrets
-from typing import Any, Dict, List, Optional, Union
+import sys
+from typing import Any, ClassVar, List, Optional, Union
 
-from pydantic import AnyHttpUrl, EmailStr, HttpUrl, PostgresDsn, ValidationInfo, field_validator, ConfigDict
+from pydantic import (AnyHttpUrl, EmailStr, HttpUrl, PostgresDsn,
+                      ValidationInfo, field_validator)
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -66,16 +68,22 @@ class Settings(BaseSettings):
 
     EMAIL_RESET_TOKEN_EXPIRE_HOURS: int = 48
     EMAIL_TEMPLATES_DIR: str = "app/email-templates/build"
-    EMAILS_ENABLED: bool = True
+    EMAILS_ENABLED: Optional[bool] = False
 
     EMAIL_TEST_USER: EmailStr = "test@example.com"  # type: ignore
     USERS_OPEN_REGISTRATION: bool = True  # Allow public registration or not
 
+    if "pytest" in sys.modules:
+        env_file: ClassVar[str] = ".env.test.local"
+    else:
+        env_file: ClassVar[str] = ".env"
+
     model_config = SettingsConfigDict(
-        env_file = ".env",
-        env_file_encoding = "utf-8",
-        from_attributes = True,
-        extra='ignore')
+        env_file=env_file,
+        env_file_encoding="utf-8",
+        from_attributes=True,
+        extra="ignore",
+    )
 
 
 settings = Settings()

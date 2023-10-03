@@ -2,7 +2,7 @@ from typing import Any
 
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declared_attr
-from sqlalchemy.orm import sessionmaker, as_declarative
+from sqlalchemy.orm import as_declarative, sessionmaker
 
 from app.core.config import settings
 
