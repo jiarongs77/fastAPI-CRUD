@@ -25,7 +25,7 @@ class ItemUpdate(ItemBase):
 class ItemInDBBase(ItemBase):
     id: int
     title: str
-    owner_id: int
+    author_id: int
 
     class Config:
         from_attributes = True
@@ -33,8 +33,8 @@ class ItemInDBBase(ItemBase):
 
 # Properties to return to client
 class Item(ItemInDBBase):
-    owner_id: int
-    owner: PublicUser
+    author_id: int
+    author: PublicUser
 
     class Config:
         from_attributes = True
