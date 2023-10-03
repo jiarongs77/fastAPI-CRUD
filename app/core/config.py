@@ -36,10 +36,11 @@ class Settings(BaseSettings):
 
     SENTRY_DSN: Optional[HttpUrl] = None
 
-    POSTGRES_SERVER: str
+    POSTGRES_HOST: str
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
     POSTGRES_DB: str
+    POSTGRES_PORT: int
     SQLALCHEMY_DATABASE_URI: Optional[str] = None
 
     @field_validator("SQLALCHEMY_DATABASE_URI", mode="before")
@@ -53,8 +54,9 @@ class Settings(BaseSettings):
                 scheme="postgresql",
                 username=values.get("POSTGRES_USER"),
                 password=values.get("POSTGRES_PASSWORD"),
-                host=values.get("POSTGRES_SERVER"),
+                host=values.get("POSTGRES_HOST"),
                 path=f"{values.get('POSTGRES_DB') or ''}",
+                port=values.get("POSTGRES_PORT"),
             )
         )
 

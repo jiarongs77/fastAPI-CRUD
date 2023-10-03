@@ -25,10 +25,11 @@ PROJECT_NAME=your_project_name
 FIRST_SUPERUSER=your_superuser_email@example.com
 FIRST_SUPERUSER_PASSWORD=your_superuser_password
 
-POSTGRES_SERVER=localhost:5432
+POSTGRES_HOST=localhost
 POSTGRES_USER=your_username
 POSTGRES_PASSWORD=your_password
 POSTGRES_DB=your_db_name
+POSTGRES_PORT=5432
 
 SMTP_PORT=587
 SMTP_HOST=smtp.gmail.com
