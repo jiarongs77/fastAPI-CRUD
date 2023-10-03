@@ -1,10 +1,10 @@
 from typing import Any, List
 
-from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app import crud, models, schemas
 from app.api import deps
+from fastapi import APIRouter, Depends, HTTPException
 
 router = APIRouter()
 
@@ -38,7 +38,9 @@ def create_item(
     """
     Create new item.
     """
-    item = crud.item.create_with_author(db=db, obj_in=item_in, author_id=current_user.id)
+    item = crud.item.create_with_author(
+        db=db, obj_in=item_in, author_id=current_user.id
+    )
     return item
 
 
