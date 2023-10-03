@@ -1,4 +1,5 @@
-# FastAPI
+# FastAPI Base Project
+This project aims to build a base project to build RESTful APIs for production application using FastAPI. It's highly inspired by [Full Stack FastAPI and PostgreSQL - Base Project Generator](https://github.com/tiangolo/full-stack-fastapi-postgresql/tree/master).
 
 ## Get Started
 1. Clone the repository
