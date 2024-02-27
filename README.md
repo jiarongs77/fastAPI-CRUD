@@ -1,13 +1,16 @@
 # FastAPI Base Project
+
 This project aims to build a base project to build RESTful APIs for production application using FastAPI. It's highly inspired by [Full Stack FastAPI and PostgreSQL - Base Project Generator](https://github.com/tiangolo/full-stack-fastapi-postgresql/tree/master).
 
 ## Get Started
 
-0. Prerequisite: 
+0. Prerequisite:
+
 - Install Postgresql by following [Set up database](#set-up-database)
 - Install [Poetry](https://python-poetry.org/docs/#installation). Poetry is a tool for dependency management and packaging in Python.
 
 1. Clone the repository
+
 ```bash
 git clone git@github.com:eclipsegst/fastapi.git
 ```
@@ -25,18 +28,23 @@ Install dependencies and initial database migration
 ```
 
 4. Run the app
+
 ```
 ./run.sh
 ```
+
 or
+
 ```bash
 poetry run uvicorn app.main:app --reload
 ```
+
 Note: `poetry run` will run under poetry virtualenv.
 
 6. Check it
+
 - http://127.0.0.1:8000
-- API docs: 
+- API docs:
   - http://127.0.0.1:8000/docs
   - http://127.0.0.1:8000/redoc
 
@@ -45,59 +53,78 @@ Note: You might need to add `export PYTHONPATH=$(pwd):$PYTHONPATH` to `~/.bash_p
 ## Docker
 
 1. Build image
+
 ```bash
 docker build -t fastai-image .
 ```
+
 2. Run a container
 
 ```bash
 docker run -d --name fastai-container -p 80:80 fastai-image
 ```
-3. Check it here: 
-  - http://127.0.0.1
-  - API docs: 
-    - http://127.0.0.1/docs
-    - http://127.0.0.1/redoc
+
+3. Check it here:
+
+- http://127.0.0.1
+- API docs:
+  - http://127.0.0.1/docs
+  - http://127.0.0.1/redoc
 
 ## Manage dependencies
+
 ```bash
 poetry lock
 poetry install
 ```
+
 Add a new dependency to `pyproject.toml`
 
 ## Set up database
+
 Install postgresql
+
 ```
 brew install postgresql
 brew services start postgresql
 brew services stop postgresql
 ```
+
 Check if it's running
+
 ```
 ps -ef | grep postgres
 ```
+
 Create user with password
+
 ```
 createuser -U postgres -W
 ```
+
 Create database with name `fastapi_db`
+
 ```
 createdb -U postgres -w fastapi_db
 ```
+
 Set up initial data
+
 ```
 ./setup.sh
 ```
+
 ### Database Migration
 
 Initial migration
+
 ```
 alembic revision --autogenerate -m "Initial migration"
 alembic upgrade head
 ```
 
 Further Developing
+
 ```
 alembic revision --autogenerate -m "description of your change"
 alembic upgrade head
@@ -108,6 +135,7 @@ alembic upgrade head
 For a simple local test, we need to set up a separate database for test, e.g. `fastapi_db_test`.
 
 ## Steps
+
 - Change db name to `fastapi_db_test` in `.env`
 - Run `./setup` to set up initial migration
 - Create `.env.test.local` by copying `.env`
@@ -118,6 +146,7 @@ For a simple local test, we need to set up a separate database for test, e.g. `f
 Note: We can also use docker for setting up test environment.
 
 ## Notes
+
 [1]: [Tutorial - User Guide](https://fastapi.tiangolo.com/tutorial/)
 
 [2]: [uvicorn-gunicorn-fastapi-docker ](https://github.com/tiangolo/uvicorn-gunicorn-fastapi-docker/tree/master#quick-start)
