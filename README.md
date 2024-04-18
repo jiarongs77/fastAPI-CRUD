@@ -8,6 +8,7 @@ This project aims to build a base project to build RESTful APIs for production a
 
 - Install Postgresql by following [Set up database](#set-up-database)
 - Install [Poetry](https://python-poetry.org/docs/#installation). Poetry is a tool for dependency management and packaging in Python.
+- Install [Postico 2](https://eggerapps.at/postico2/) for easily visualizing PostgreSQL tables.
 
 1. Clone the repository
 
@@ -17,7 +18,11 @@ git clone git@github.com:eclipsegst/fastapi.git
 
 2. Create `.env`
 
-Copy `.env.example` and rename to `.env`
+Copy `.env.example` and rename to `.env`, update the values. Make sure the POSTGRES_DB is same as the one you set up in [Set up database](#set-up-database) and also in `setup.sh`.
+
+```bash
+cp .env.example .env
+```
 
 3. Configuration
 
@@ -50,7 +55,7 @@ Note: `poetry run` will run under poetry virtualenv.
 
 Note: You might need to add `export PYTHONPATH=$(pwd):$PYTHONPATH` to `~/.bash_profile` if you get an error like "Cannot import or no app module".
 
-## Docker
+## Run with Docker
 
 1. Build image
 
