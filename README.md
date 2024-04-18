@@ -2,6 +2,14 @@
 
 This project aims to build a base project to build RESTful APIs for production application using FastAPI. It's highly inspired by [Full Stack FastAPI and PostgreSQL - Base Project Generator](https://github.com/tiangolo/full-stack-fastapi-postgresql/tree/master).
 
+## Tech Stack
+
+- [FastAPI](https://fastapi.tiangolo.com/) for Python backend API.
+  - [Pydantic](https://docs.pydantic.dev/) for data validation and settings management.
+  - PostgreSQL as the SQL database
+  - [Alembic](https://github.com/sqlalchemy/alembic) for database migration
+- Tests with [Pytest](https://docs.pytest.org/en/8.0.x/).
+
 ## Get Started
 
 0. Prerequisite:
@@ -18,7 +26,7 @@ git clone git@github.com:eclipsegst/fastapi.git
 
 2. Create `.env`
 
-Copy `.env.example` and rename to `.env`, update the values. Make sure the POSTGRES_DB is same as the one you set up in [Set up database](#set-up-database) and also in `setup.sh`.
+Copy `.env.example` and rename to `.env`, update the values. Make sure the database name is same as the one you set up in [Set up database](#set-up-database) and also in `setup.sh`.
 
 ```bash
 cp .env.example .env
@@ -157,3 +165,7 @@ Note: We can also use docker for setting up test environment.
 [2]: [uvicorn-gunicorn-fastapi-docker ](https://github.com/tiangolo/uvicorn-gunicorn-fastapi-docker/tree/master#quick-start)
 
 [3]: [Full Stack FastAPI and PostgreSQL - Base Project Generator](https://github.com/tiangolo/full-stack-fastapi-postgresql/tree/master)
+
+## License
+
+FastAPI Base Project is licensed under the terms of the MIT license.
