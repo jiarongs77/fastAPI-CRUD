@@ -1,11 +1,9 @@
-from typing import List
-
+from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session, joinedload
 
 from app.crud.base import CRUDBase
 from app.models.item import Item
 from app.schemas.item import ItemCreate, ItemUpdate
-from fastapi.encoders import jsonable_encoder
 
 
 class CRUDItem(CRUDBase[Item, ItemCreate, ItemUpdate]):
@@ -21,7 +19,7 @@ class CRUDItem(CRUDBase[Item, ItemCreate, ItemUpdate]):
 
     def get_multi_by_author(
         self, db: Session, *, author_id: int, skip: int = 0, limit: int = 100
-    ) -> List[Item]:
+    ) -> list[Item]:
         return (
             db.query(self.model)
             .filter(Item.author_id == author_id)
@@ -32,7 +30,7 @@ class CRUDItem(CRUDBase[Item, ItemCreate, ItemUpdate]):
 
     def get_multi_public(
         self, db: Session, *, skip: int = 0, limit: int = 100
-    ) -> List[Item]:
+    ) -> list[Item]:
         return (
             db.query(self.model)
             .options(joinedload(self.model.author))

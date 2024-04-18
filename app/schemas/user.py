@@ -1,16 +1,15 @@
 from datetime import datetime
-from typing import Optional
 
 from pydantic import BaseModel, EmailStr, Field
 
 
 # Shared properties
 class UserBase(BaseModel):
-    email: Optional[EmailStr] = None
-    is_active: Optional[bool] = True
+    email: EmailStr | None = None
+    is_active: bool | None = True
     is_superuser: bool = False
-    name: Optional[str] = None
-    created_at: Optional[datetime] = Field(
+    name: str | None = None
+    created_at: datetime | None = Field(
         default=None, description="Date and time the user was created"
     )
 
@@ -23,11 +22,11 @@ class UserCreate(UserBase):
 
 # Properties to receive via API on update
 class UserUpdate(UserBase):
-    password: Optional[str] = None
+    password: str | None = None
 
 
 class UserInDBBase(UserBase):
-    id: Optional[int] = None
+    id: int | None = None
 
     class Config:
         from_attributes = True
@@ -39,7 +38,7 @@ class User(UserInDBBase):
 
 
 class PublicUser(BaseModel):
-    name: Optional[str] = None
+    name: str | None = None
 
 
 # Additional properties stored in DB

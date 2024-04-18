@@ -1,9 +1,15 @@
 import secrets
 import sys
-from typing import Any, ClassVar, List, Optional, Union
+from typing import Any, ClassVar
 
-from pydantic import (AnyHttpUrl, EmailStr, HttpUrl, PostgresDsn,
-                      ValidationInfo, field_validator)
+from pydantic import (
+    AnyHttpUrl,
+    EmailStr,
+    HttpUrl,
+    PostgresDsn,
+    ValidationInfo,
+    field_validator,
+)
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -18,33 +24,33 @@ class Settings(BaseSettings):
     # BACKEND_CORS_ORIGINS is a JSON-formatted list of origins
     # e.g: '["http://localhost", "http://localhost:4200", "http://localhost:3000", \
     # "http://localhost:8080"]'
-    BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = []
+    BACKEND_CORS_ORIGINS: list[AnyHttpUrl] = []
 
-    SERVER_NAME: Optional[str] = None
-    SERVER_HOST: Optional[AnyHttpUrl] = None
-    PROJECT_NAME: Optional[str] = None
-    FIRST_SUPERUSER: Optional[EmailStr] = None
-    FIRST_SUPERUSER_PASSWORD: Optional[str] = None
+    SERVER_NAME: str | None = None
+    SERVER_HOST: AnyHttpUrl | None = None
+    PROJECT_NAME: str | None = None
+    FIRST_SUPERUSER: EmailStr | None = None
+    FIRST_SUPERUSER_PASSWORD: str | None = None
 
     @field_validator("BACKEND_CORS_ORIGINS", mode="before")
-    def assemble_cors_origins(cls, v: Union[str, List[str]]) -> Union[List[str], str]:
+    def assemble_cors_origins(cls, v: str | list[str]) -> list[str] | str:
         if isinstance(v, str) and not v.startswith("["):
             return [i.strip() for i in v.split(",")]
-        elif isinstance(v, (list, str)):
+        elif isinstance(v, list | str):
             return v
         raise ValueError(v)
 
-    SENTRY_DSN: Optional[HttpUrl] = None
+    SENTRY_DSN: HttpUrl | None = None
 
     POSTGRES_HOST: str
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
     POSTGRES_DB: str
     POSTGRES_PORT: int
-    SQLALCHEMY_DATABASE_URI: Optional[str] = None
+    SQLALCHEMY_DATABASE_URI: str | None = None
 
     @field_validator("SQLALCHEMY_DATABASE_URI", mode="before")
-    def assemble_db_connection(cls, v: Optional[str], info: ValidationInfo) -> Any:
+    def assemble_db_connection(cls, v: str | None, info: ValidationInfo) -> Any:
         assert info.data is not None
         values = info.data
         if isinstance(v, str):
@@ -61,16 +67,16 @@ class Settings(BaseSettings):
         )
 
     SMTP_TLS: bool = True
-    SMTP_PORT: Optional[int] = None
-    SMTP_HOST: Optional[str] = None
-    SMTP_USER: Optional[str] = None
-    SMTP_PASSWORD: Optional[str] = None
-    EMAILS_FROM_EMAIL: Optional[EmailStr] = None
-    EMAILS_FROM_NAME: Optional[str] = None
+    SMTP_PORT: int | None = None
+    SMTP_HOST: str | None = None
+    SMTP_USER: str | None = None
+    SMTP_PASSWORD: str | None = None
+    EMAILS_FROM_EMAIL: EmailStr | None = None
+    EMAILS_FROM_NAME: str | None = None
 
     EMAIL_RESET_TOKEN_EXPIRE_HOURS: int = 48
     EMAIL_TEMPLATES_DIR: str = "app/email-templates/build"
-    EMAILS_ENABLED: Optional[bool] = False
+    EMAILS_ENABLED: bool | None = False
 
     EMAIL_TEST_USER: EmailStr = "test@example.com"  # type: ignore
     USERS_OPEN_REGISTRATION: bool = True  # Allow public registration or not

@@ -1,16 +1,14 @@
-from typing import Dict
-
+from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
 from app import crud
 from app.core.config import settings
 from app.schemas.user import UserCreate
 from app.tests.utils.utils import random_email, random_lower_string
-from fastapi.testclient import TestClient
 
 
 def test_get_users_superuser_me(
-    client: TestClient, superuser_token_headers: Dict[str, str]
+    client: TestClient, superuser_token_headers: dict[str, str]
 ) -> None:
     r = client.get(f"{settings.API_V1_STR}/users/me", headers=superuser_token_headers)
     current_user = r.json()
@@ -21,7 +19,7 @@ def test_get_users_superuser_me(
 
 
 def test_get_users_normal_user_me(
-    client: TestClient, normal_user_token_headers: Dict[str, str]
+    client: TestClient, normal_user_token_headers: dict[str, str]
 ) -> None:
     r = client.get(f"{settings.API_V1_STR}/users/me", headers=normal_user_token_headers)
     current_user = r.json()
@@ -88,7 +86,7 @@ def test_create_user_existing_username(
 
 
 def test_create_user_by_normal_user(
-    client: TestClient, normal_user_token_headers: Dict[str, str]
+    client: TestClient, normal_user_token_headers: dict[str, str]
 ) -> None:
     username = random_email()
     password = random_lower_string()

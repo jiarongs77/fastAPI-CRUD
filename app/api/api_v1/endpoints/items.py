@@ -1,15 +1,15 @@
-from typing import Any, List
+from typing import Any
 
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app import crud, models, schemas
 from app.api import deps
-from fastapi import APIRouter, Depends, HTTPException
 
 router = APIRouter()
 
 
-@router.get("/", response_model=List[schemas.Item])
+@router.get("/", response_model=list[schemas.Item])
 def read_items(
     db: Session = Depends(deps.get_db),
     skip: int = 0,

@@ -1,5 +1,3 @@
-from typing import Optional
-
 from pydantic import BaseModel
 
 from app.schemas.user import PublicUser
@@ -7,8 +5,8 @@ from app.schemas.user import PublicUser
 
 # Shared properties
 class ItemBase(BaseModel):
-    title: Optional[str] = None
-    description: Optional[str] = None
+    title: str | None = None
+    description: str | None = None
 
 
 # Properties to receive on item creation
