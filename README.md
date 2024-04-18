@@ -68,14 +68,29 @@ Note: You might need to add `export PYTHONPATH=$(pwd):$PYTHONPATH` to `~/.bash_p
 1. Build image
 
 ```bash
-docker build -t fastai-image .
+docker build -t fastapi-image .
 ```
 
 2. Run a container
 
 ```bash
-docker run -d --name fastai-container -p 80:80 fastai-image
+docker run -d --name fastapi-container -p 80:80 fastapi-image
 ```
+
+check container status,
+
+```bash
+docker logs -f fastapi-container
+```
+
+Some useful docker commands:
+
+- docker container ls
+- docker container stop container_id
+- docker rm /fastapi-container
+- docker image ls
+- docker image rm image_id
+- docker logs -f fastapi-container
 
 3. Check it here:
 

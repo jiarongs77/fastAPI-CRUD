@@ -20,6 +20,6 @@ WORKDIR /app
 COPY ./poetry.lock ./pyproject.toml /app/
 RUN poetry install
 
-COPY ./app /app
+COPY . /app
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
