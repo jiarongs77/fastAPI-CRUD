@@ -1,0 +1,30 @@
+name: Tests
+
+
+on:
+ push:
+   branches:
+     - main
+     - '**' # any branch
+jobs:
+ build:
+   runs-on: ubuntu-latest
+   strategy:
+     matrix:
+       python-version: ["3.11"]
+   steps:
+     - uses: actions/checkout@v3
+
+
+     - name: Set up Python ${{ matrix.python-version }}
+       uses: actions/setup-python@v3
+       with:
+         python-version: ${{ matrix.python-version }}
+     - name: Set PYTHONPATH
+       run: echo "PYTHONPATH=${{ github.workspace }}" >> $GITHUB_ENV
+
+
+     - name: Run tests
+       run: |
+        echo “hello world”
+         ./test.sh
