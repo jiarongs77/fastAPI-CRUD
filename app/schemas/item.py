@@ -7,6 +7,7 @@ from app.schemas.user import PublicUser
 class ItemBase(BaseModel):
     title: str | None = None
     description: str | None = None
+    is_done: bool
 
 
 # Properties to receive on item creation
@@ -24,6 +25,7 @@ class ItemInDBBase(ItemBase):
     id: int
     title: str
     author_id: int
+    is_done: bool
 
     class Config:
         from_attributes = True

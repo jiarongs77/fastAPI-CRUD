@@ -1,4 +1,4 @@
-from sqlalchemy import Column, DateTime, ForeignKey, Integer, String
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Boolean
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
@@ -14,3 +14,4 @@ class Item(Base):
     author_id = Column(Integer, ForeignKey("users.id"))
     author = relationship("User", back_populates="items")
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+    is_done = Column(Boolean)
